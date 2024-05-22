@@ -20,6 +20,6 @@ class FilmController extends Controller
         ]);
 
         Film::create($validatedData);
-        return redirect('/admin/tambah-film')->with('success', 'Data bioskop berhasil ditambahkan.');
+        return redirect('/admin')->with('success', 'Data bioskop berhasil ditambahkan.');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bioskop;
+use App\Models\Film;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
@@ -11,7 +12,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view("admin.admin");
+        $bioskop = Bioskop::all();
+        $film = Film::all();
+        return view("admin.admin", compact('bioskop', 'film'));
     }
 
     public function bioskop()
@@ -34,6 +37,6 @@ class AdminController extends Controller
         ]);
 
         Bioskop::create($validatedData);
-        return redirect('tambah')->with('success', 'Data bioskop berhasil ditambahkan.');
+        return redirect('/admin')->with('success', 'Data bioskop berhasil ditambahkan.');
     }
 }
