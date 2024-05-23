@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
@@ -23,15 +24,20 @@
                     <th scope="col">Nama Bioskop</th>
                     <th scope="col">Lokasi</th>
                     <th scope="col">Jumlah Studio</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($bioskop as $a)
                     <tr>
+
                         <td>{{$a->bioskop_id}}</td>
                         <td>{{$a->nama_bioskop}}</td>
                         <td>{{$a->lokasi}}</td>
                         <td>{{$a->jml_studio}}</td>
+                        <td>
+                            <a href="{{url('edit-bioskop', $a->bioskop_id)}}">Edit</a> | <a href="#">Hapus</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -49,6 +55,7 @@
                     <th scope="col">Durasi</th>
                     <th scope="col">Tanggal Rilis</th>
                     <th scope="col">Deskripsi</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +67,9 @@
                         <td>{{$b->durasi}} Menit</td>
                         <td>{{$b->tgl_rilis}}</td>
                         <td>{{$b->deskripsi}}</td>
+                        <td>
+                            <a href="{{url('edit-film', $b->film_id)}}">Edit</a> | <a href="#">Hapus</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

@@ -27,16 +27,5 @@ class AdminController extends Controller
         return view("admin.tambah-film");
     }
 
-    public function store(Request $request): RedirectResponse
-    {
-        $validatedData = $request->validate([
-            'bioskop_id' => 'required|unique:bioskop',
-            'nama_bioskop' => 'required',
-            'lokasi' => 'required',
-            'jml_studio' => 'required',
-        ]);
-
-        Bioskop::create($validatedData);
-        return redirect('/admin')->with('success', 'Data bioskop berhasil ditambahkan.');
-    }
+    
 }

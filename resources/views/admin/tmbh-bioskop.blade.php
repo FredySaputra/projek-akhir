@@ -17,7 +17,7 @@
 
     @include("layouts.nav-admin")
     <div class="layout">
-        <form  action="{{ url('tambah')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('tambah')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="jdl_tambah">
                 <h3>Tambah Bioskop</h3>
@@ -42,7 +42,26 @@
                 <input type="text" name="jml_studio" class="form-control" id="formGroupExampleInput" placeholder="10"
                     required>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">Submit</button>
+            <div class=" modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Yakin ingin menambahkan?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Pastikan data yang dimasukan sudah benar</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </body>

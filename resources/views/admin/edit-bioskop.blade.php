@@ -14,49 +14,37 @@
 </head>
 
 <body>
-    @csrf
+
     @include("layouts.nav-admin")
     <div class="layout">
-        <div class="jdl_tambah">
-            <h3>Tambah Film</h3>
-        </div>
-        <form action="/tambah-film" method="post">
+        <form action="{{url('update-bioskop', $bskp->bioskop_id)}}" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">
-                <label for="film_id" class="form-label">ID Film</label>
-                <input type="text" name="film_id" class="form-control" id="film_id" placeholder="12ALAN">
+            <div class="jdl_tambah">
+                <h3>Edit Bioskop</h3>
             </div>
             <div class="mb-3">
-                <label for="judul" class="form-label">Judul</label>
-                <input type="text" name="judul" class="form-control" id="judul" placeholder="Agak Laen">
+                <label for="formGroupExampleInput2" class="form-label">ID Bioskop</label>
+                <input type="text" class="form-control" name="bioskop_id" value="{{$bskp->bioskop_id}}"
+                    id="formGroupExampleInput2" placeholder="AR23" disabled required>
             </div>
             <div class="mb-3">
-                <label for="judul" class="form-label">Genre</label>
-                <select class="form-select" name="genre" aria-label="Default select example">
-                    <option selected name="genre">Pilih Genre</option>
-                    <option value="Horror" name="genre">Horror</option>
-                    <option value="Comedy" name="genre">Comedy</option>
-                    <option value="Romance" name="genre">Romance</option>
-                </select>
+                <label for="formGroupExampleInput" class="form-label">Nama Bioskop</label>
+                <input type="text" name="nama_bioskop" class="form-control" id="formGroupExampleInput"
+                    placeholder="Jendela Bioskop" required>
             </div>
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Durasi </label>
-                <div class="input-group mb-3">
-                    <input type="text" name="durasi" id="formGroupExampleInput" class="form-control" placeholder="100">
-                    <span class="input-group-text" id="basic-addon2">Menit</span>
-                </div>
+                <label for="formGroupExampleInput2" class="form-label">Lokasi</label>
+                <input type="text" name="lokasi" class="form-control" id="formGroupExampleInput2"
+                    placeholder="Jakarta Selatan" required>
             </div>
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Tanggal Rilis</label>
-                <input type="date" name="tgl_rilis" class="form-control" placeholder="">
-            </div>
-            <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Deskripsi Film</label>
-                <input type="text" name="deskripsi" class="form-control" placeholder="film ini menceritakan .. ">
+                <label for="formGroupExampleInput" class="form-label">Jumlah Studio</label>
+                <input type="text" name="jml_studio" class="form-control" id="formGroupExampleInput" placeholder="10"
+                    required>
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Submit</button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class=" modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -65,7 +53,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Pastikan data yang anda masukkan sudah benar</p>
+                            <p>Pastikan data yang dimasukan sudah benar</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

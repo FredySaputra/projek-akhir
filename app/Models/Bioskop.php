@@ -11,8 +11,11 @@ class Bioskop extends Model
 
 
     protected $table = 'bioskop';
-    protected $primaryKey = 'bioskop_id';
 
+    protected $primaryKey = "bioskop_id";
+    protected $keyType = 'string';
+
+    public $incrementing = false;
     protected $fillable = [
         'bioskop_id',
         'nama_bioskop',

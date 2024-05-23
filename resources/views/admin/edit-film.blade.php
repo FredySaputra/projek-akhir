@@ -18,15 +18,16 @@
     @include("layouts.nav-admin")
     <div class="layout">
         <div class="jdl_tambah">
-            <h3>Tambah Film</h3>
+            <h3>Edit Film</h3>
         </div>
-        <form action="/tambah-film" method="post">
+        <form action="{{url('update-film', $film->film_id)}}" method="post" enctype="multipart/form-data">
             @csrf
+
             <div class="mb-3">
                 <label for="film_id" class="form-label">ID Film</label>
-                <input type="text" name="film_id" class="form-control" id="film_id" placeholder="12ALAN">
+                <input type="text" name="film_id" class="form-control" id="film_id" value="{{$film->film_id}}" disabled>
             </div>
-            <div class="mb-3">
+            <div class=" mb-3">
                 <label for="judul" class="form-label">Judul</label>
                 <input type="text" name="judul" class="form-control" id="judul" placeholder="Agak Laen">
             </div>
@@ -61,7 +62,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Yakin ingin menambahkan?</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Yakin ingin mengubah data?</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
