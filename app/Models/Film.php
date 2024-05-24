@@ -24,6 +24,7 @@ class Film extends Model
         'durasi',
         'tgl_rilis',
         'deskripsi',
+        'cover',
     ];
 
 }

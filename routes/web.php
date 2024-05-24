@@ -27,9 +27,12 @@ Route::post("tambah", [BioskopController::class, 'store']);
 Route::get("tambah", [BioskopController::class, 'store']);
 Route::get('/edit-bioskop/{bioskop_id}', [BioskopController::class, 'edit'])->name('edit-bioskop');
 Route::post('/update-bioskop/{bioskop_id}', [BioskopController::class, 'update'])->name('update-bioskop');
+Route::get('/delete-bioskop/{bioskop_id}', [BioskopController::class, 'destroy'])->name('delete-bioskop');
+;
 
 //film
 Route::get('/admin/tambah-film', [AdminController::class, 'film']);
 Route::post('/tambah-film', [FilmController::class, 'store']);
 Route::get('/edit-film/{film_id}', [FilmController::class, 'edit'])->name('edit-film');
 Route::post('/update-film/{film_id}', [FilmController::class, 'update'])->name('update-film');
+Route::get('/delete-film/{film_id}', [FilmController::class, 'destroy'])->name('delete-film');

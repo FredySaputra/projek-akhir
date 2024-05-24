@@ -17,6 +17,11 @@ return new class extends Migration {
             $table->string('durasi');
             $table->date('tgl_rilis');
             $table->string('deskripsi');
+            $table->string('cover');
+        });
+
+        Schema::table('film', function (Blueprint $table) {
+            $table->string('cover'); // Menambahkan kolom baru
         });
     }
 

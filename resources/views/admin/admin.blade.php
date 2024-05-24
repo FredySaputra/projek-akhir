@@ -36,7 +36,8 @@
                         <td>{{$a->lokasi}}</td>
                         <td>{{$a->jml_studio}}</td>
                         <td>
-                            <a href="{{url('edit-bioskop', $a->bioskop_id)}}">Edit</a> | <a href="#">Hapus</a>
+                            <a href="{{url('edit-bioskop', $a->bioskop_id)}}">Edit</a> | <a
+                                href="{{url('delete-bioskop', $a->bioskop_id)}}">Hapus</a>
                         </td>
                     </tr>
                 @endforeach
@@ -55,6 +56,7 @@
                     <th scope="col">Durasi</th>
                     <th scope="col">Tanggal Rilis</th>
                     <th scope="col">Deskripsi</th>
+                    <th scope="col">Cover</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -67,8 +69,10 @@
                         <td>{{$b->durasi}} Menit</td>
                         <td>{{$b->tgl_rilis}}</td>
                         <td>{{$b->deskripsi}}</td>
+                        <td>{{$b->cover}}</td>
                         <td>
-                            <a href="{{url('edit-film', $b->film_id)}}">Edit</a> | <a href="#">Hapus</a>
+                            <a href="{{url('edit-film', $b->film_id)}}">Edit</a> | <a
+                                href="{{url('delete-film', $b->film_id)}}">Hapus</a>
                         </td>
                     </tr>
                 @endforeach

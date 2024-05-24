@@ -29,31 +29,70 @@
             </div>
             <div class=" mb-3">
                 <label for="judul" class="form-label">Judul</label>
-                <input type="text" name="judul" class="form-control" id="judul" placeholder="Agak Laen">
+                <input type="text" name="judul" class="form-control" id="judul" placeholder="Agak Laen"
+                    value="{{$film->judul}}" required>
+                @error('judul')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="judul" class="form-label">Genre</label>
                 <select class="form-select" name="genre" aria-label="Default select example">
-                    <option selected name="genre">Pilih Genre</option>
+                    <option selected name="genre" required>Pilih Genre</option>
                     <option value="Horror" name="genre">Horror</option>
                     <option value="Comedy" name="genre">Comedy</option>
                     <option value="Romance" name="genre">Romance</option>
                 </select>
+                @error('genre')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Durasi </label>
                 <div class="input-group mb-3">
-                    <input type="text" name="durasi" id="formGroupExampleInput" class="form-control" placeholder="100">
+                    <input type="text" name="durasi" id="formGroupExampleInput" class="form-control" placeholder="100"
+                        value="{{$film->durasi}}" required>
                     <span class="input-group-text" id="basic-addon2">Menit</span>
+                    @error('durasi')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Tanggal Rilis</label>
-                <input type="date" name="tgl_rilis" class="form-control" placeholder="">
+                <input type="date" name="tgl_rilis" class="form-control" value="{{$film->tgl_rilis}}" required>
+                @error('tgl_rilis')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Deskripsi Film</label>
-                <input type="text" name="deskripsi" class="form-control" placeholder="film ini menceritakan .. ">
+                <input type="text" name="deskripsi" class="form-control" placeholder="film ini menceritakan .. "
+                    value="{{$film->deskripsi}}" required>
+                @error('deskripsi')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="cover" class="form-label">Upload Cover</label>
+                <input type="hidden" name="oldcover" value="{{$film->cover}}">
+                <img src="{{asset('storage/' . $film->cover)}}" class="img-preview img-fluid d-block">
+                <input class="form-control" type="file" id="cover" name="cover" onchange="previewImage()" required>
+                @error('cover')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Submit</button>
@@ -80,3 +119,22 @@
 </body>
 
 </html>
+<script>
+
+    function previewImage() {
+        const image = document.querySelector('#cover')
+        const imgPreview = document.querySelector('.img-preview')
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
+
+
+
+</script>

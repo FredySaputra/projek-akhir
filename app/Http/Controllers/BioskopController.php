@@ -33,4 +33,11 @@ class BioskopController extends Controller
         $bskp->update($request->all());
         return redirect('admin')->with('success', 'Data Berhasil di Update');
     }
+
+    public function destroy($bioskop_id)
+    {
+        $bskp = Bioskop::findOrFail($bioskop_id);
+        $bskp->delete();
+        return back();
+    }
 }
