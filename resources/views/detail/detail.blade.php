@@ -16,15 +16,20 @@
 <body>
     @include("layouts.navbar")
     <div class="judul">
-        <h3>Detail Film</h3>
+        <h3>{{$film->judul}}</h3>
     </div>
-
+    <div class="film-item">
+        <img src="{{asset('storage/' . $film->cover)}}" class="rounded float-start cover" alt="...">
+    </div>
     <div class="beli">
-        <a class="btn btn-primary" href="/konfirmasi" role="button">Beli Tiket</a>
+        <a class="btn btn-primary" href="{{url('konfirmasi', $film->film_id)}}" role="button">Beli Tiket</a>
+    </div>
+    <div class="deskripsi">
+        <p>{{$film->deskripsi}}</p>
     </div>
 
     <div>
-        <h4></h4>
+
     </div>
     @include("layouts.footer")
 </body>

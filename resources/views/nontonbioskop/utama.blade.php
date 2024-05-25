@@ -11,17 +11,25 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/utama.css">
+    <link rel="shortcut icon" href="/images/jendela.png" type="x-icon">
 </head>
 
 <body>
     @include("layouts.navbar");
 
-    <div class="container text-center">
+
+    <div class="container">
         <div class="row">
-            <div class="col">col</div>
-            <div class="col">col</div>
-            <div class="col">col</div>
-            <div class="col">col</div>
+            @foreach ($film as $f)
+                <div class="card" style="width: 18rem;">
+                    <img src="{{asset('storage/' . $f->cover)}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{$f->judul}}</h5>
+                        <p class="card-text"></p>
+                        <a href="{{url('detail-film', $f->film_id)}}" class="btn btn-primary">Beli Tiket</a>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
     @include("layouts.footer");

@@ -14,9 +14,9 @@ Route::get('/', function () {
 //user
 Route::get('/nontonbioskop', [PesanController::class, 'index']);
 
-Route::get('/detail', [DetailController::class, 'index']);
+Route::get('/detail-film/{film_id}', [DetailController::class, 'index']);
 
-Route::get('/konfirmasi', [KonfirmasiController::class, 'index']);
+Route::get('/konfirmasi/{film_id}', [KonfirmasiController::class, 'index']);
 
 //admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');

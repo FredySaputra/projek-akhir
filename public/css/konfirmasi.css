@@ -1,29 +1,8 @@
-.judul{
-    font-family: roboto;
-    margin-top: 20px;
-    margin-left: 50px;
-}
-
-.beli{
-    font-family: roboto;
-    margin-left: 300px;
-    margin-top:  100px;;
-}
-
-.cover{
-    margin-left: 50px;
-
-}
-
-.deskripsi{
-    margin-top: 170px;
-    margin-left: 50px;
-}
-
 .film-item {
     flex: 0 1 calc(25% - 16px); /* Ukuran item adalah 25% dari kontainer minus jarak */
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
+    margin-top: -30px;
 }
 
 .cover {
@@ -32,4 +11,25 @@
     object-fit: cover; /* Gambar akan diubah ukurannya agar sesuai dengan kontainer tanpa mengubah aspek rasio */
     border-radius: 8px; /* Opsional: untuk sudut melengkung */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Opsional: untuk memberikan bayangan */
+    margin-left: 200px;
 }
+
+.judul{
+    font-family: roboto;
+    margin-top: 20px;
+    margin-left: 430px;
+}
+
+.durasi{
+    margin-left: 430px;
+    margin-top: -100px;
+    margin-bottom: 300px;
+}
+
+.font-bskp{
+    font-family: roboto;
+    gap: 16px;
+}
+
+
+

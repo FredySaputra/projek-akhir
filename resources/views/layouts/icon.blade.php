@@ -1,0 +1,1 @@
+<link rel="shortcut icon" href="/images/jendela.png'" type="x-icon">
