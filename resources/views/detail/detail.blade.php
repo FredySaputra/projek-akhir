@@ -13,19 +13,32 @@
     <link rel="stylesheet" href="/css/detail.css">
 </head>
 
+
 <body>
     @include("layouts.navbar")
     <div class="judul">
-        <h3>{{$film->judul}}</h3>
+        <h3>{{$jadwal->film->judul}}</h3>
     </div>
     <div class="film-item">
-        <img src="{{asset('storage/' . $film->cover)}}" class="rounded float-start cover" alt="...">
+        <img src="{{asset('storage/' . $jadwal->film->cover)}}" class="rounded float-start cover" alt="...">
     </div>
     <div class="beli">
-        <a class="btn btn-primary" href="{{url('konfirmasi', $film->film_id)}}" role="button">Beli Tiket</a>
+        @auth
+            @if($tiket)
+                <a class="btn btn-primary" href="{{ url('konfirmasi', $jadwal->jadwal_id) }}" role="button">Beli Tiket</a>
+            @else
+                <p>Tiket tidak tersedia</p>
+            @endif          
+            @else
+                @if($tiket)
+                    <a class="btn btn-primary" href="{{ route('login') }}" role="button">Beli Tiket</a>
+                @else
+                    <p>Tiket tidak tersedia</p>
+                @endif          
+                @endauth
     </div>
     <div class="deskripsi">
-        <p>{{$film->deskripsi}}</p>
+        <p>{{$jadwal->film->deskripsi}}</p>
     </div>
 
     <div>

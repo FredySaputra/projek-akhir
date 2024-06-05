@@ -27,4 +27,9 @@ class Film extends Model
         'cover',
     ];
 
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'film_id');
+    }
+
 }

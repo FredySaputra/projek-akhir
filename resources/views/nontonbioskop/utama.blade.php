@@ -15,24 +15,31 @@
 </head>
 
 <body>
-    @include("layouts.navbar");
-
-
+    @include("layouts.navbar")
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="container">
         <div class="row">
-            @foreach ($film as $f)
+            @forelse ($jadwals as $f)
                 <div class="card" style="width: 18rem;">
-                    <img src="{{asset('storage/' . $f->cover)}}" class="card-img-top" alt="...">
+                    <img src="{{asset('storage/' . $f->film->cover)}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{$f->judul}}</h5>
+                        <h5 class="card-title">{{$f->film->judul}}</h5>
                         <p class="card-text"></p>
-                        <a href="{{url('detail-film', $f->film_id)}}" class="btn btn-primary">Beli Tiket</a>
+                        <a href="{{url('detail-film', $f->jadwal_id)}}" class="btn btn-primary">Beli Tiket</a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="kosong">
+                    <h3>Jadwal belum ditambahkan</h3>
+                </div>
+            @endforelse
         </div>
     </div>
-    @include("layouts.footer");
+    <!-- @include("layouts.footer"); -->
 </body>
 
 </html>

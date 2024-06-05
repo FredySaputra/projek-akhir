@@ -22,4 +22,9 @@ class Bioskop extends Model
         'lokasi',
         'jml_studio',
     ];
+
+    public function studio()
+    {
+        return $this->hasMany(Studio::class, 'studio_id');
+    }
 }

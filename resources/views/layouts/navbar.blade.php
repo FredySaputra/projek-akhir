@@ -6,8 +6,20 @@
 <link rel="stylesheet" href="/css/navbar.css">
 <nav class="navbar bg-success">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" class="font">
             Jendela21
         </a>
+        @auth
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <form action="/logout" method="post">
+                            @csrf
+                            <button class="nav-link active" type="submit" aria-current="page"><i
+                                    class="bi bi-box-arrow-left"></i>LogOut</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        @endauth
     </div>
 </nav>

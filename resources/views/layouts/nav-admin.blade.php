@@ -16,11 +16,18 @@
                     <a class="nav-link active" aria-current="page" href="#">User</a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/tambah-bioskop">Bioskop</a>
+                    <a class="nav-link active" aria-current="page" href="/admin/tambah-bioskop">Tambah Bioskop</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/admin/tambah-film">Film</a>
+                    <a class="nav-link active" aria-current="page" href="/admin/tambah-film">Tambah Film</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin/tambah-studio">Tambah Studio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/admin/tambah-jadwal">Tambah Jadwal</a>
+                </li>
+
                 <!-- <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li> -->

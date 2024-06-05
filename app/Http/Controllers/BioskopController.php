@@ -29,6 +29,7 @@ class BioskopController extends Controller
 
     public function update(Request $request, $bioskop_id): RedirectResponse
     {
+        dd($request->all());
         $bskp = Bioskop::findOrFail($bioskop_id);
         $bskp->update($request->all());
         return redirect('admin')->with('success', 'Data Berhasil di Update');

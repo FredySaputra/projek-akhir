@@ -87,7 +87,7 @@
                 <label for="cover" class="form-label">Upload Cover</label>
                 <input type="hidden" name="oldcover" value="{{$film->cover}}">
                 <img src="{{asset('storage/' . $film->cover)}}" class="img-preview img-fluid d-block">
-                <input class="form-control" type="file" id="cover" name="cover" onchange="previewImage()" required>
+                <input class="form-control" type="file" id="cover" name="cover" onchange="previewImage()" >
                 @error('cover')
                     <div class="invalid-feedback">
                         {{ $message }}

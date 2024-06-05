@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
+use App\Models\Tiket;
 use Illuminate\Http\Request;
 use App\Models\Film;
 
 class DetailController extends Controller
 {
-    public function index($film_id)
+    public function index($jadwal_id)
     {
-        $film = Film::findOrFail($film_id);
-        return view("detail.detail", compact('film'));
+        $jadwal = Jadwal::findOrFail($jadwal_id);
+        $tiket = Tiket::with(['jadwal'])->get();
+        return view("detail.detail", compact('tiket',  'jadwal'));
     }
+
 }

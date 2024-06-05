@@ -47,7 +47,9 @@ class FilmController extends Controller
         ]);
 
         $film = Film::findOrFail($film_id);
-        $film->update($request->except('cover'));
+
+        // Ambil semua data kecuali cover
+        $data = $request->except('cover');
 
         if ($request->hasFile('cover')) {
             // Hapus file cover lama jika ada
@@ -58,8 +60,11 @@ class FilmController extends Controller
             // Simpan file cover baru
             $file = $request->file('cover');
             $path = $file->store('cover', 'public');
-            $film->update(['cover' => $path]);
+            $data['cover'] = $path; // Tambahkan path cover baru ke data
         }
+
+        // Perbarui film dengan data baru
+        $film->update($data);
 
         return redirect()->route('admin')->with('success', 'Film updated successfully');
     }

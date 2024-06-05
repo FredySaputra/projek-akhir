@@ -29,7 +29,17 @@
 .font-bskp{
     font-family: roboto;
     gap: 16px;
+    margin-left: 200px  ;
 }
 
 
+
+.seats{
+    background-color: lightgreen;
+    margin-right: 2px;
+}
+
+/* .harga{
+    margin-left: 300px;
+} */
 

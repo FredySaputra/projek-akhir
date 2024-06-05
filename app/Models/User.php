@@ -10,16 +10,15 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    protected $primaryKey = "user_id";
+    protected $keyType = 'string';
     protected $fillable = [
-        'name',
+        'user_id',
+        'nama',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -44,4 +43,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function tiket()
+    {
+        return $this->hasMany(Tiket::class, 'user_id');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class, 'user_id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
+    }
+
 }

@@ -79,7 +79,35 @@
             </tbody>
         </table>
     </div>
+    <div class="terdaftar">
+        <h4>Studio Terdaftar</h4>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID Studio</th>
+                    <th scope="col">ID Bioskop</th>
+                    <th scope="col">Nama Studio</th>
+                    <th scope="col">Kapasitas Kursi</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($studio as $s)
+                    <tr>
 
+                        <td>{{$s->studio_id}}</td>
+                        <td>{{$s->bioskop_id}}</td>
+                        <td>{{$s->nama_studio}}</td>
+                        <td>{{$s->kap_kursi}}</td>
+                        <td>
+                            <!-- <a href="{{url('edit-bioskop', $a->bioskop_id)}}">Edit</a> | <a
+                                    href="{{url('delete-bioskop', $a->bioskop_id)}}">Hapus</a> -->
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
