@@ -151,6 +151,13 @@ class KonfirmasiController extends Controller
         $validated['tiket_id'] = $tiket->tiket_id;
 
         Payment::create($validated);
+        
+        $wallet = Wallet::where('user_id', Auth::user()->user_id)->first();
+        $pay = $request->validate([
+            'amount' => 'required',
+        ]);
+        $wallet->update($pay);
+
         return redirect('/nontonbioskop')->with('success', 'Berhasil melakukan pembelian tiket bioskop');
 
     }

@@ -30,6 +30,11 @@
 </head>
 
 <body class="bg-light">
+@if(session('loginError'))
+        <div class="alert alert-danger">
+            {{ session('loginError') }}
+        </div>
+    @endif
     @if (session()->has('success'))
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>{{Session('success')}}</strong> Silahkan lakukan login.

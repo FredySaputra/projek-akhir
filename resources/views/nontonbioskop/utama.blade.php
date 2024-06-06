@@ -20,6 +20,14 @@
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
+    @elseif(session('oke'))
+        <div class="alert alert-success">
+            {{ session('oke') }}
+        </div>
+    @elseif(session('login'))
+        <div class="alert alert-success">
+            {{ session('login') }}
+        </div>
     @endif
     <div class="container">
         <div class="row">

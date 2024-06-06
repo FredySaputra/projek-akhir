@@ -4,22 +4,35 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/navbar.css">
-<nav class="navbar bg-success">
+<nav class="navbar navbar-expand-lg bg-success border-bottom border-body data-bs-theme=" dark"">
     <div class="container-fluid">
-        <a class="navbar-brand" class="font">
-            Jendela21
-        </a>
-        @auth
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <a class="navbar-brand" href="#">Jendela 21</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url('/nontonbioskop')}}">Sedang Tayang</a>
+                </li>
+                @auth
                     <li class="nav-item">
-                        <form action="/logout" method="post">
-                            @csrf
-                            <button class="nav-link active" type="submit" aria-current="page"><i
-                                    class="bi bi-box-arrow-left"></i>LogOut</button>
-                        </form>
+                        <a class="nav-link" href="#">Riwayat Pembayaran</a>
                     </li>
-                </ul>
-            </div>
-        @endauth
+                @endauth
+            </ul>
+            @auth
+                <li class="navbar-nav  ms-auto ">
+                    <form action="/logout" method="post">
+                        @csrf
+                        <button class="nav-link active" type="submit" aria-current="page"><i
+                                class="bi bi-box-arrow-left"></i>Logout</button>
+                    </form>
+                </li>
+            @endauth
+            </ul>
+
+        </div>
     </div>
 </nav>

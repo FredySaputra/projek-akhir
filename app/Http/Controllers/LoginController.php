@@ -29,11 +29,12 @@ class LoginController extends Controller
         // Jika kata sandi telah dienkripsi dengan Bcrypt, gunakan Hash::check
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $request->session()->flash('login', 'Berhasil Login');
             return redirect()->intended('/nontonbioskop');
         }
 
-
-        return back()->with('loginError', 'Login Failed!');
+        
+        return back()->with('loginError', 'Login gagal! Email atau password salah!');
     }
 
     public function register()
@@ -62,6 +63,7 @@ class LoginController extends Controller
         
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->flash('oke', 'Berhasil Logout');
         return redirect('/nontonbioskop');
     }
 }
