@@ -20,18 +20,19 @@
                 <input type="hidden" name="user_id" value="{{Auth::user()->user_id}}">
             @endauth
             @if (isset($waktu) && isset($tanggal) && isset($kursi))
-                <p>Tanggal: {{ $jadwal->studio->nama_studio}}</p>
-                <input type="hidden" name="jadwal_id" value="{{$jadwal->jadwal_id}}">
-                <input type="hidden" name="jumlah" value="{{$total}}">
-                <p>Tanggal: {{ $tanggal }}</p>
-                <input type="hidden" name="tgl_pesan" value="{{$tanggal}}">
-                <input type="hidden" name="tgl_payment" value="{{$tanggal}}">
-                <p>Waktu: {{ $waktu }}</p>
-                <input type="hidden" name="waktu" value="{{$waktu}}">
-                <p>Kursi: {{ $kursi }}</p>
-                <input type="hidden" name="nomor_kursi" value="{{$kursi}}">
-                <p>Total Harga: Rp{{ count(explode(',', $kursi)) * $harga }}</p>
-                <input type="hidden" name="harga" value="{{ count(explode(',', $kursi)) * $harga }}">
+            <p>Tanggal: {{ $jadwal->studio->nama_studio}}</p>
+            <input type="hidden" name="jadwal_id" value="{{$jadwal->jadwal_id}}">
+            <input type="hidden" name="jumlah" value="{{$total}}">
+            <p>Tanggal: {{ $tanggal }}</p>
+            <input type="hidden" name="tgl_pesan" value="{{$tanggal}}">
+            <input type="hidden" name="tgl_payment" value="{{$tanggal}}">
+            <p>Waktu: {{ $waktu }}</p>
+            <input type="hidden" name="waktu" value="{{$waktu}}">
+            <p>Kursi: {{ $kursi }}</p>
+            <input type="hidden" name="nomor_kursi" value="{{$kursi}}">
+            <p>Total Harga: Rp{{ count(explode(',', $kursi)) * $harga }}</p>
+            <input type="hidden" name="harga" value="{{ count(explode(',', $kursi)) * $harga }}">
+            @if(isset(Auth::user()->wallet_id))
                 <p>Saldo E-Wallet : Rp{{$wallet->amount}}</p>
                 <input type="hidden" name="amount" value="{{ $wallet->amount - (count(explode(',', $kursi)) * $harga)}}">
                 @if($wallet->amount >= count(explode(',', $kursi)) * $harga)
@@ -39,6 +40,10 @@
                 @else
                     <button type="button" class="btn btn-success" disabled>Konfirmasi Pembelian</button>
                 @endif
+            @else
+                <p>Anda Belum Memiliki E-Wallet, daftar untuk melanjutkan transaksi!</p>
+                <a href="#">daftar e-wallet</a>
+                @endisset
             @else
                 <p>No session values found.</p>
             @endif

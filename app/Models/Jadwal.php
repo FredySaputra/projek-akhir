@@ -21,7 +21,8 @@ class Jadwal extends Model
         'studio_id',
         'tgl_tayang',
         'wkt_tayang',
-        'sisa_kursi',
+        'harga',
+        'terpesan',
         'created_at',
         'updated_at'
     ];

@@ -73,6 +73,8 @@ Route::get('/bangku/{jadwal_id}', [KonfirmasiController::class, 'bangku'])->name
 Route::post('/save-seats/{jadwal_id}', [KonfirmasiController::class, 'simpan'])->name('save-seats');
 Route::get('/final/{jadwal_id}', [KonfirmasiController::class, 'final'])->name('final');
 
+//Riwayat
+Route::get('/riwayat-pembelian/{user_id}', [PesanController::class, 'riwayat'])->name('riwayat');
 
 //coba
 // Route::get('/cinemas/{bioskop_id}/halls/create', [StudioController::class, 'cre'])->name('halls.create');

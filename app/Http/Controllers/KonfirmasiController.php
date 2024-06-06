@@ -76,17 +76,22 @@ class KonfirmasiController extends Controller
 
 
     public function bangku(Request $request, $jadwal_id)
-    {
-        $jadwal = Jadwal::findOrFail($jadwal_id);
-        Session::put('tanggal', $request->input('tanggal'));
-        Session::put('jam', $request->input('jamTayang'));
-        Session::put('harga', $request->input('harga'));
-        $harga = $request->session()->get("harga");
-        $waktu = $request->session()->get("jam");
-        $tanggal = $request->session()->get("tanggal");
+{
+    $jadwal = Jadwal::findOrFail($jadwal_id);
+    $selectedSeats = explode(',', $jadwal->terpesan); // Ubah string menjadi array dengan pemisah koma
 
-        return view("konfirmasi.bangku", compact("waktu", "jadwal", "tanggal", "harga"));
-    }
+    Session::put('tanggal', $request->input('tanggal'));
+    Session::put('jam', $request->input('jamTayang'));
+    Session::put('harga', $request->input('harga'));
+
+    $harga = $request->session()->get("harga");
+    $waktu = $request->session()->get("jam");
+    $tanggal = $request->session()->get("tanggal");
+
+    return view("konfirmasi.bangku", compact("waktu", "jadwal", "tanggal", "harga", "selectedSeats"));
+}
+
+
 
     public function simpan(Request $request, $jadwal_id)
     {
@@ -114,8 +119,7 @@ class KonfirmasiController extends Controller
         $kursi = $request->session()->get("nomor_kursi");
         $harga = $request->session()->get("harga");
         $total = count(explode(',', $kursi)) * $harga;
-        $uang = $wallet->amount;
-        return view("konfirmasi.confirm", compact("waktu", "tanggal", "kursi", "jadwal", "harga", "wallet", "total", "uang"));
+        return view("konfirmasi.confirm", compact("waktu", "tanggal", "kursi", "jadwal", "harga", "wallet", "total"));
     }
     public function session(Request $request, $jadwal_id)
     {
@@ -157,8 +161,14 @@ class KonfirmasiController extends Controller
             'amount' => 'required',
         ]);
         $wallet->update($pay);
-
+        $jadwal = Jadwal::findOrFail($validatedData['jadwal_id']);
+        $existingSeats = explode(',', $jadwal->terpesan);
+        $newSeats = explode(',', $validatedData['nomor_kursi']);
+        $updatedSeats = array_unique(array_merge($existingSeats, $newSeats));
+        $jadwal->terpesan = implode(',', $updatedSeats);
+        $jadwal->save();
+    
         return redirect('/nontonbioskop')->with('success', 'Berhasil melakukan pembelian tiket bioskop');
-
+    
     }
 }

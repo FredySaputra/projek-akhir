@@ -18,7 +18,7 @@
                 </li>
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Riwayat Pembayaran</a>
+                        <a class="nav-link" href="{{route('riwayat',Auth::user()->user_id)}}">Riwayat Pembayaran</a>
                     </li>
                 @endauth
             </ul>

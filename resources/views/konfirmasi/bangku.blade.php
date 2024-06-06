@@ -14,16 +14,20 @@
         .clicked {
             background-color: yellow;
         }
+
+        .disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
     </style>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
     <form action="{{ route('save-seats', $jadwal->jadwal_id) }}" method="POST">
         @csrf
-        <input type="text" name="harga" value="{{session('harga')}}" hidden>
-        <input type="text" name="tanggal" value="{{session('tanggal')}}" hidden>
-        <input type="text" name="jam" value="{{session('jam')}}" hidden>
+        <input type="text" name="harga" value="{{ session('harga') }}" hidden>
+        <input type="text" name="tanggal" value="{{ session('tanggal') }}" hidden>
+        <input type="text" name="jam" value="{{ session('jam') }}" hidden>
         <input type="hidden" name="nomor_kursi" value="">
         <table>
             <tr>
@@ -46,11 +50,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let selectedSeats = [];
+        let disabledSeats = @json($selectedSeats);
+
+        console.log('Disabled Seats: ', disabledSeats); // Debugging log
+
+        if (!Array.isArray(disabledSeats)) {
+            disabledSeats = [];
+        }
 
         function changeColor(event) {
             let th = event.currentTarget;
             let value = th.getAttribute('data-value');
-            console.log("Clicked seat: ", value);  // Debugging log
+            console.log("Clicked seat: ", value); // Debugging log
+
+            if (disabledSeats.includes(value)) {
+                return; // Do nothing if the seat is disabled
+            }
 
             if (selectedSeats.includes(value)) {
                 selectedSeats = selectedSeats.filter(seat => seat !== value);
@@ -59,11 +74,18 @@
                 selectedSeats.push(value);
                 th.classList.add('clicked');
             }
-            console.log("Selected seats: ", selectedSeats);  // Debugging log
+            console.log("Selected seats: ", selectedSeats); // Debugging log
         }
 
         document.querySelectorAll('.seats').forEach(function (element) {
-            element.addEventListener('click', changeColor);
+            let value = element.getAttribute('data-value');
+            if (disabledSeats.includes(value)) {
+                console.log('Disabling seat: ', value); // Debugging log
+                element.classList.add('disabled');
+                element.style.pointerEvents = 'none';
+            } else {
+                element.addEventListener('click', changeColor);
+            }
         });
 
         document.getElementById('sendData').addEventListener('click', function () {
