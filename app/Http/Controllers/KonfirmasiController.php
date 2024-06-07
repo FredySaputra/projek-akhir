@@ -23,31 +23,14 @@ class KonfirmasiController extends Controller
     public function index($jadwal_id)
     {
 
-        $bioskop = Bioskop::all();
+        $jadwal = Jadwal::with('film', 'studio.bioskop')->findOrFail($jadwal_id);
+        $groupedJadwal = Jadwal::where('film_id', $jadwal->film_id)
+            ->where('tgl_tayang', $jadwal->tgl_tayang)
+            ->with('studio.bioskop')
+            ->get()
+            ->groupBy('studio.bioskop.nama_bioskop');
 
-        $today = Carbon::today()->toDateString();
-        $jadwals = Jadwal::findOrFail($jadwal_id);
-        $film_id = $jadwals->film_id;
-        // Ambil jadwal dan seat yang sudah terpesan
-        $jadwal = Jadwal::with([
-            'studio.bioskop',
-            'film',
-            'tiket' => function ($query) use ($today) {
-                $query->whereDate('created_at', $today); // Pastikan filter tanggal sesuai
-            }
-        ])->where('film_id', $film_id)->get();
-
-        $filteredJadwal = $jadwal->filter(function ($item) use ($today) {
-            return $item->tgl_tayang == $today;
-        });
-
-        $groupedJadwal = $filteredJadwal->groupBy(function ($item) {
-            return $item->studio->bioskop->nama_bioskop . '-' . $item->tgl_tayang;
-        });
-
-        $maxseats = 10;
-        $userId = Auth::user()->user_id;
-        return view('konfirmasi.konfirmasi', compact('bioskop', 'jadwals', 'groupedJadwal', 'maxseats', 'userId', 'jadwals'));
+        return view('konfirmasi.konfirmasi', compact('jadwal', 'groupedJadwal'));
     }
 
     public function store(Request $request)
@@ -76,20 +59,20 @@ class KonfirmasiController extends Controller
 
 
     public function bangku(Request $request, $jadwal_id)
-{
-    $jadwal = Jadwal::findOrFail($jadwal_id);
-    $selectedSeats = explode(',', $jadwal->terpesan); // Ubah string menjadi array dengan pemisah koma
+    {
+        $jadwal = Jadwal::findOrFail($jadwal_id);
+        $selectedSeats = explode(',', $jadwal->terpesan); // Ubah string menjadi array dengan pemisah koma
 
-    Session::put('tanggal', $request->input('tanggal'));
-    Session::put('jam', $request->input('jamTayang'));
-    Session::put('harga', $request->input('harga'));
+        Session::put('tanggal', $request->input('tanggal'));
+        Session::put('jam', $request->input('jamTayang'));
+        Session::put('harga', $request->input('harga'));
 
-    $harga = $request->session()->get("harga");
-    $waktu = $request->session()->get("jam");
-    $tanggal = $request->session()->get("tanggal");
+        $harga = $request->session()->get("harga");
+        $waktu = $request->session()->get("jam");
+        $tanggal = $request->session()->get("tanggal");
 
-    return view("konfirmasi.bangku", compact("waktu", "jadwal", "tanggal", "harga", "selectedSeats"));
-}
+        return view("konfirmasi.bangku", compact("waktu", "jadwal", "tanggal", "harga", "selectedSeats"));
+    }
 
 
 
@@ -132,7 +115,7 @@ class KonfirmasiController extends Controller
 
     }
 
-    public function confirm(Request $request):RedirectResponse
+    public function confirm(Request $request): RedirectResponse
     {
 
         $validatedData = $request->validate([
@@ -155,7 +138,7 @@ class KonfirmasiController extends Controller
         $validated['tiket_id'] = $tiket->tiket_id;
 
         Payment::create($validated);
-        
+
         $wallet = Wallet::where('user_id', Auth::user()->user_id)->first();
         $pay = $request->validate([
             'amount' => 'required',
@@ -167,8 +150,15 @@ class KonfirmasiController extends Controller
         $updatedSeats = array_unique(array_merge($existingSeats, $newSeats));
         $jadwal->terpesan = implode(',', $updatedSeats);
         $jadwal->save();
-    
+
         return redirect('/nontonbioskop')->with('success', 'Berhasil melakukan pembelian tiket bioskop');
-    
+
+    }
+
+    public function detail($tiket_id)
+    {   
+        $tiket = Tiket::findOrFail($tiket_id);
+        $riwayat = Tiket::where('tiket_id',$tiket_id)->get();
+        return view("riwayat.detail-riwayat", compact("tiket","riwayat"));
     }
 }

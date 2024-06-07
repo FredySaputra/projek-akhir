@@ -75,7 +75,7 @@ Route::get('/final/{jadwal_id}', [KonfirmasiController::class, 'final'])->name('
 
 //Riwayat
 Route::get('/riwayat-pembelian/{user_id}', [PesanController::class, 'riwayat'])->name('riwayat');
-
+Route::get('/tiket/{tiket_id}', [KonfirmasiController::class, 'detail'])->name('detail-riwayat');
 //coba
 // Route::get('/cinemas/{bioskop_id}/halls/create', [StudioController::class, 'cre'])->name('halls.create');
 // Route::post('/cinemas/{bioskop_id}/halls', [StudioController::class, 'st'])->name('halls.store');

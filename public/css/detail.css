@@ -21,15 +21,15 @@
 }
 
 .film-item {
-    flex: 0 1 calc(25% - 16px); /* Ukuran item adalah 25% dari kontainer minus jarak */
+    flex: 0 1 calc(25% - 16px); 
     box-sizing: border-box;
     margin-bottom: 20px;
 }
 
 .cover {
-    width: 200px; /* Lebar 100% dari kontainer film-item */
-    height: 300px; /* Tinggi tetap */
-    object-fit: cover; /* Gambar akan diubah ukurannya agar sesuai dengan kontainer tanpa mengubah aspek rasio */
-    border-radius: 8px; /* Opsional: untuk sudut melengkung */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Opsional: untuk memberikan bayangan */
+    width: 200px; 
+    height: 300px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }

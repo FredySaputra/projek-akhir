@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wallet;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class LoginController extends Controller
             return redirect()->intended('/nontonbioskop');
         }
 
-        
+
         return back()->with('loginError', 'Login gagal! Email atau password salah!');
     }
 
@@ -52,7 +53,16 @@ class LoginController extends Controller
         ]);
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        User::create($validatedData);
+        $user = User::create($validatedData);
+
+        $validated = $request->validate([
+            'amount' => "required",
+            
+        ]);
+
+        $validated['user_id'] = $user->user_id;
+
+        Wallet::create($validated);
         $request->session()->flash('success', 'Registrasi Berhasil!');
         return redirect('login');
     }
@@ -63,7 +73,7 @@ class LoginController extends Controller
         
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        $request->session()->flash('oke', 'Berhasil Logout');
+        $request->session()->flash('oke', 'Anda berhasil logout!');
         return redirect('/nontonbioskop');
     }
 }

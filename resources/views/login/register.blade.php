@@ -25,6 +25,7 @@
                     <h5 class="card-title">Jendela 21</h5>
                     <input class="form-control" type="text" placeholder="nama" name="nama"
                         aria-label="default input example" required>
+                        <input type="hidden" name="amount" value=1000000>
                     <input class="form-control" type="text" placeholder="email" name="email"
                         aria-label="default input example" required>
                     <input class="form-control" type="password" placeholder="password" name="password"

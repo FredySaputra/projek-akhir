@@ -14,35 +14,39 @@
 
 <body>
     @include('layouts.navbar')
-    @forelse ($tiket as $t)
-        <h1>Riwayat Pembelian Tiket Bioskop</h1>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Tiket ID</th>
-                    <th scope="col">Nama Bioskop</th>
-                    <th scope="col">Nama Studio</th>
-                    <th scope="col">Nomor Kursi</th>
-                    <th scope="col">Waktu Tayang</th>
-                    <th scope="col">Total Harga</th>
-                    <th scope="col">Tanggal Pesan</th>
-                    <th scope="col">Detail</th>
-                </tr>
-            </thead>
-            <tbody>
+    <h1>Riwayat Pembelian Tiket Bioskop</h1>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tiket ID</th>
+                <th scope="col">Nama Bioskop</th>
+                <th scope="col">Nama Studio</th>
+                <th scope="col">Nama Film</th>
+                <th scope="col">Nomor Kursi</th>
+                <th scope="col">Waktu Tayang</th>
+                <th scope="col">Total Harga</th>
+                <th scope="col">Tanggal Pesan</th>
+                <th scope="col">Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($tiket as $t)
                 <tr>
                     <td>{{$t->tiket_id}}</td>
                     <td>{{$t->jadwal->studio->bioskop->nama_bioskop}}</td>
                     <td>{{$t->jadwal->studio->nama_studio}}</td>
+                    <td>{{$t->jadwal->film->judul}}</td>
                     <td>{{$t->nomor_kursi}}</td>
                     <td>{{$t->waktu}}</td>
                     <td>{{$t->harga}}</td>
                     <td>{{$t->tgl_pesan}}</td>
-                    <td>aksi</td>
+                    <td>
+                        <a href="/tiket/{{$t->tiket_id}}" class="btn btn-primary">Klik</a>
+                    </td>
                 </tr>
-    @empty
-        <h5>Anda belum melakukan transaksi apapun</h5>
-    @endforelse
+            @empty
+                <h5>Anda belum melakukan transaksi apapun</h5>
+            @endforelse
         </tbody>
     </table>
 </body>

@@ -20,7 +20,10 @@ class PesanController extends Controller
 
         // Mengambil data nama_film untuk tanggal hari ini melalui relasi
         $jadwals = Jadwal::whereDate('tgl_tayang', $tanggalHariIni)->with('film')->latest()->get();
-        return view("nontonbioskop.utama", compact('film', 'jadwals'));
+        $jadwal = $jadwals->groupBy('film_id')->map(function ($group) {
+            return $group->first();
+        });
+        return view("nontonbioskop.utama", compact('film', 'jadwals','jadwal'));
     }
 
     public function riwayat($user_id)

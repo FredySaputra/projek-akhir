@@ -17,21 +17,24 @@
 <body>
     @include("layouts.navbar")
     @if (session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @elseif(session('oke'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('oke') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @elseif(session('login'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('login') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
     <div class="container">
         <div class="row">
-            @forelse ($jadwals as $f)
+            @forelse ($jadwal as $f)
                 <div class="card" style="width: 18rem;">
                     <img src="{{asset('storage/' . $f->film->cover)}}" class="card-img-top" alt="...">
                     <div class="card-body">
